@@ -16,9 +16,8 @@ def banner():
 []      [][][]    [][][]    []    []  []      []  []     []  [][][]
 
                       [bold green]CREATED BY: DIKIDJATAR
-                    [bold yellow]"do not change author name"
 ''', style="bold white", width=80))
-   
+# do not change author name!
 def clear_layar():
    try:os.system('cls' if os.name == 'nt' else 'clear')
    except:pass
