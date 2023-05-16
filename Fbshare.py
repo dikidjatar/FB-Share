@@ -14,6 +14,9 @@ def banner():
 [bold yellow][][][]  [][][]      [][]    [][][][]  [][][][][]  [][][]     [][][]
 [bold red][]      []    []        []  []    []  []      []  []   []    []
 []      [][][]    [][][]    []    []  []      []  []     []  [][][]
+
+                      [bold green]CREATED BY: DIKIDJATAR
+                    [bold yellow]"do not change author name"
 ''', style="bold white", width=80))
    
 def clear_layar():

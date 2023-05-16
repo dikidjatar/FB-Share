@@ -5,6 +5,7 @@
 - `pkg install git`
 - `git clone https://github.com/dikidjatar/FB-Share`
 - `cd FB-Share`
+- `pip3 install -r requirements.txt`
 - `python3 Fbshare.py`
 
 **Good Luck**
